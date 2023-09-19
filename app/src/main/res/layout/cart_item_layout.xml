@@ -11,9 +11,10 @@
         android:id="@+id/fitnessImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/splashdemo"
+        android:contentDescription="Fitness Image"
+        android:padding="5dp"
         android:scaleType="centerCrop"
-        android:contentDescription="Fitness Image"/>
+        android:src="@drawable/splashdemo" />
 
     <LinearLayout
         android:layout_width="0dp"

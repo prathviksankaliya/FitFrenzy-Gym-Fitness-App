@@ -1,5 +1,7 @@
 package com.itcraftsolution.fitfrenzygymfitnessapp;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +39,7 @@ public class LoginFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle(""); // Set an empty title
         }
+
         // Set click listener for the login button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +48,18 @@ public class LoginFragment extends Fragment {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                // Example: Check if username and password are empty
+                // Check if username and password are empty
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(requireContext(), "Username and password are required.", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Add your login logic here
-                    // You can compare username and password with stored data or authenticate with a server
+                    // Attempt to log in by comparing with stored registration data
+                    if (performLogin(username, password)) {
+                        // Login successful, start the HomeActivity
+                        startHomeActivity();
+                    } else {
+                        // Login failed, display an error message
+                        Toast.makeText(requireContext(), "Invalid username or password.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -65,7 +74,7 @@ public class LoginFragment extends Fragment {
                 // Replace the current fragment with the RegistrationFragment
                 requireActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_register,registrationFragment)
+                        .replace(R.id.fragment_container, registrationFragment)
                         .addToBackStack(null) // Add to the back stack for back navigation
                         .commit();
             }
@@ -73,11 +82,20 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private boolean performLogin(String username, String password) {
+        // Retrieve user registration data from SharedPreferences
+        SharedPreferences preferences = requireActivity().getSharedPreferences("UserData", 0);
+        String storedUsername = preferences.getString("Username", "");
+        String storedPassword = preferences.getString("Password", "");
 
+        // Compare entered username and password with stored data
+        return username.equals(storedUsername) && password.equals(storedPassword);
+    }
 
-
+    private void startHomeActivity() {
+        // Start the HomeActivity upon successful login
+        Intent intent = new Intent(requireActivity(), HomeActivity.class);
+        startActivity(intent);
+        requireActivity().finish(); // Finish the current activity (LoginActivity)
     }
 }
