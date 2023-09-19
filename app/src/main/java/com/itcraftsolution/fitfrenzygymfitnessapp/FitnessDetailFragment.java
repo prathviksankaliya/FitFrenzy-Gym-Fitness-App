@@ -27,14 +27,14 @@ public class FitnessDetailFragment extends Fragment {
         TextView fitnessDescriptionTextView = view.findViewById(R.id.fitnessDescriptionTextView);
 
         // Retrieve the selected fitness item data from arguments or wherever it's stored
-        FitnessItem selectedFitnessItem = getArguments().getParcelable("selectedFitnessItem");
+//        FitnessItem selectedFitnessItem = getArguments().getParcelable("selectedFitnessItem");
 
         // Populate views with data
-        if (selectedFitnessItem != null) {
-            fitnessImageView.setImageResource(selectedFitnessItem.getImageResId());
-            fitnessTitleTextView.setText(selectedFitnessItem.getTitle());
-            fitnessDescriptionTextView.setText(selectedFitnessItem.getDescription());
-        }
+//        if (selectedFitnessItem != null) {
+//            fitnessImageView.setImageResource(selectedFitnessItem.getImageResId());
+//            fitnessTitleTextView.setText(selectedFitnessItem.getTitle());
+//            fitnessDescriptionTextView.setText(selectedFitnessItem.getDescription());
+//        }
 
         return view;
     }

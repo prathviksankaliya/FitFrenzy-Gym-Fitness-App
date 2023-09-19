@@ -26,13 +26,8 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, container, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
         // Initialize views
         usernameEditText = view.findViewById(R.id.usernameEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
@@ -75,6 +70,14 @@ public class LoginFragment extends Fragment {
                         .commit();
             }
         });
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
 
     }
 }

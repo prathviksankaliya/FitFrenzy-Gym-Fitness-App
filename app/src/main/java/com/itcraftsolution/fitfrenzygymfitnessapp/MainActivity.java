@@ -21,17 +21,6 @@ public class MainActivity extends AppCompatActivity {
         // Load the SplashFragment initially
         loadFragment(new SplashFragment());
 
-        // Check user's login status and load the appropriate fragment
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        boolean userRegistered = settings.getBoolean(USER_REGISTERED_KEY, false);
-
-        if (!userRegistered) {
-            // If the user is not registered, show the RegisterFragment
-            loadFragment(new RegisterFragment());
-        } else {
-            // If the user is registered, show the LoginFragment
-            loadFragment(new LoginFragment());
-        }
     }
 
     // Method to load a fragment into the container

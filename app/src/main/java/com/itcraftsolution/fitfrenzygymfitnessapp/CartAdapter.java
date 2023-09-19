@@ -1,5 +1,6 @@
 package com.itcraftsolution.fitfrenzygymfitnessapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +18,10 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
     private List<FitnessItem> fitnessItems; // Replace with your fitness data model
+    private Context context;
 
-    public CartAdapter(List<FitnessItem> fitnessItems) {
+    public CartAdapter(Context context, List<FitnessItem> fitnessItems) {
+        this.context = context;
         this.fitnessItems = fitnessItems;
     }
 
@@ -50,9 +53,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 FitnessDetailFragment detailFragment = new FitnessDetailFragment();
 
                 // Pass the selected fitness item as an argument to the fragment
-                Bundle args = new Bundle();
-                args.putParcelable("selectedFitnessItem", fitnessItems);
-                detailFragment.setArguments(args);
+//                Bundle args = new Bundle();
+//                args.putParcelable("selectedFitnessItem", fitnessItems);
+//                detailFragment.setArguments(args);
 
                 // Replace the current fragment with the FitnessDetailFragment
                 FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();

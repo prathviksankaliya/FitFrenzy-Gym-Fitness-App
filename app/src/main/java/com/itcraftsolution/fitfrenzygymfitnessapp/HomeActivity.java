@@ -3,33 +3,49 @@ package com.itcraftsolution.fitfrenzygymfitnessapp;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private CartAdapter adapter;
+    private ArrayList<FitnessItem> list;
+    private RecyclerView rvFitnessItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        if (savedInstanceState == null) {
-            // Load the initial fragment (e.g., FitnessDetailFragment)
-            loadInitialFragment();
-        }
-    }
+        list = new ArrayList<>();
 
-    private void loadInitialFragment() {
-        // Create an instance of FitnessDetailFragment
-        FitnessDetailFragment detailFragment = new FitnessDetailFragment();
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        list.add(new FitnessItem(R.drawable.splashdemo, "Body Building", 2300));
+        adapter = new CartAdapter(this, list);
 
-        // Pass any data needed to the fragment using arguments (if required)
-        Bundle args = new Bundle();
-        // args.putParcelable("selectedFitnessItem", selectedFitnessItem); // Pass data if needed
-        detailFragment.setArguments(args);
+        rvFitnessItem = findViewById(R.id.rvFitnessItems);
+        rvFitnessItem.setAdapter(adapter);
+        rvFitnessItem.setLayoutManager(new LinearLayoutManager(this ));
 
-        // Replace the fragment_container with the FitnessDetailFragment
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, detailFragment)
-                .commit();
     }
 }

@@ -38,7 +38,7 @@ public class CartFragment extends Fragment {
 
         // Initialize and set up the RecyclerView
         fitnessItems = getSampleFitnessItems(); // Load your fitness data
-        cartAdapter = new CartAdapter(fitnessItems);
+        cartAdapter = new CartAdapter(requireContext(), fitnessItems);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         cartRecyclerView.setLayoutManager(layoutManager);
         cartRecyclerView.setAdapter(cartAdapter);

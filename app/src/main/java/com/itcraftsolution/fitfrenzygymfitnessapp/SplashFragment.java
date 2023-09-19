@@ -1,5 +1,8 @@
 package com.itcraftsolution.fitfrenzygymfitnessapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
@@ -18,24 +21,30 @@ public class SplashFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private boolean isLogin = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_splash, container, false);
-
-        if (getActivity() != null) {
-            getActivity().setTitle(""); // Set an empty title
-        }
         // Use a Handler to delay the transition to the next fragment
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Replace the current fragment with the LoginFragment
-                FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_register, new RegisterFragment());
-                transaction.commit();
+                SharedPreferences spf = requireContext().getSharedPreferences("FitFrenzy", Context.MODE_PRIVATE);
+                isLogin = spf.getBoolean("isUserLogin", false);
+                if(isLogin){
+                    startActivity(new Intent(requireContext(), HomeActivity.class));
+                    requireActivity().finish();
+                }else{
+                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, new RegisterFragment());
+                    transaction.commit();
+                }
+
             }
         }, SPLASH_DURATION);
 
