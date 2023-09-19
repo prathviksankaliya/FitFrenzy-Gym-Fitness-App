@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <!-- Animated logo image -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="App Logo"
+        android:src="@drawable/splashdemo"
+        android:layout_gravity="center_horizontal"
+        android:layoutAnimation="@anim/slide_up"/>
+
+    <!-- Animated text -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Developed by IT Craft Solution"
+        android:textColor="#0B0A0A"
+        android:textSize="25sp"
+        android:layoutAnimation="@anim/slide_in_text" />
+
+</LinearLayout>
