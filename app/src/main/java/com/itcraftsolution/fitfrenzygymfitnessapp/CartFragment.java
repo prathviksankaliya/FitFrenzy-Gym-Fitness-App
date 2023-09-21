@@ -49,11 +49,10 @@ public class CartFragment extends Fragment {
         List<FitnessItem> items = new ArrayList<>();
 
         // Sample fitness data
-        items.add(new FitnessItem(R.drawable.splashdemo, "Push-Ups", 100));
-        items.add(new FitnessItem(R.drawable.splashdemo, "Jumping Jacks", 150));
-        items.add(new FitnessItem(R.drawable.splashdemo, "Plank", 75));
-        items.add(new FitnessItem(R.drawable.splashdemo, "Squats", 120));
-
+        items.add(new FitnessItem(R.drawable.splashdemo, "Push-Ups", 100, ""));
+        items.add(new FitnessItem(R.drawable.splashdemo, "Jumping Jacks", 150, ""));
+        items.add(new FitnessItem(R.drawable.splashdemo, "Plank", 75, ""));
+        items.add(new FitnessItem(R.drawable.splashdemo, "Squats", 120, ""));
         return items;
     }
 

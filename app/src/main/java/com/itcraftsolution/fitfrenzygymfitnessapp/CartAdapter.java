@@ -1,23 +1,22 @@
 package com.itcraftsolution.fitfrenzygymfitnessapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import com.bumptech.glide.Glide;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
-    private List<FitnessItem> fitnessItems; // Replace with your fitness data model
+    private List<FitnessItem> fitnessItems;
     private Context context;
 
     public CartAdapter(Context context, List<FitnessItem> fitnessItems) {
@@ -38,7 +37,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         FitnessItem item = fitnessItems.get(position);
 
         // Bind data to views
-        holder.fitnessImageView.setImageResource(item.getImageResId());
+        // Use Glide to load the online .gif image into the ImageView
+        Glide.with(context)
+                .load(item.getImageUrl()) // Load the .gif image from the URL
+                .into(holder.fitnessImageView); // Display it in the ImageView
+
         holder.fitnessTitleTextView.setText(item.getTitle());
         holder.caloriesGainTextView.setText("Calories Gain: " + item.getCalories());
 
@@ -46,25 +49,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             @Override
             public void onClick(View v) {
                 // Handle item click here
-                openFitnessDetailFragment(item);
-            }
+                // Save the clicked item to SharedPreferences
+                item.saveToSharedPreferences(context);
 
-            private void openFitnessDetailFragment(FitnessItem item) {
-                FitnessDetailFragment detailFragment = new FitnessDetailFragment();
-
-                // Pass the selected fitness item as an argument to the fragment
-//                Bundle args = new Bundle();
-//                args.putParcelable("selectedFitnessItem", fitnessItems);
-//                detailFragment.setArguments(args);
-
-                // Replace the current fragment with the FitnessDetailFragment
-                FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, detailFragment);
-                transaction.addToBackStack(null); // Add to back stack for navigation
-                transaction.commit();
+                // Open the FitnessDetailsActivity
+                Intent intent = new Intent(context, FitnessDetailsActivity.class);
+                context.startActivity(intent);
             }
         });
-        // Implement any additional actions or listeners here if needed
     }
 
     @Override
@@ -84,7 +76,4 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             caloriesGainTextView = itemView.findViewById(R.id.caloriesGainTextView);
         }
     }
-    
 }
-
-

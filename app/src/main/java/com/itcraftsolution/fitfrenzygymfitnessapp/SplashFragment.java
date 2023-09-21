@@ -34,9 +34,9 @@ public class SplashFragment extends Fragment {
             @Override
             public void run() {
                 // Replace the current fragment with the LoginFragment
-                SharedPreferences spf = requireContext().getSharedPreferences("FitFrenzy", Context.MODE_PRIVATE);
-                isLogin = spf.getBoolean("isUserLogin", false);
-                if(isLogin){
+                SharedPreferences sharedPreferences = requireContext().getSharedPreferences("FitnessItemPrefs", Context.MODE_PRIVATE);
+                String title = sharedPreferences.getString("title", null);
+                if(title != null){
                     startActivity(new Intent(requireContext(), HomeActivity.class));
                     requireActivity().finish();
                 }else{
